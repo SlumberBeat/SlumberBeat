@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slumber Beat — Sleep Soundly</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --indigo: #1a1b3a;
+    --deep: #0e0f22;
+    --sky: #8b9fd4;
+    --mist: #c8d4f0;
+    --lavender: #a89fd8;
+    --gold: #c9a96e;
+    --cream: #f0ece2;
+    --soft: #e8e4f4;
+    --moon: #ddd8f0;
+    --glow: rgba(168,159,216,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--deep);
+    color: var(--cream);
+    overflow-x: hidden;
+  }
+
+  /* Stars background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 8%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 30%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 18%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 80% 45%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 25%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 60%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 35% 75%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 55%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 75% 70%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 92% 80%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(2px 2px at 5% 90%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 48% 92%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(600px 400px at 30% 20%, rgba(100,80,180,0.25) 0%, transparent 70%),
+      radial-gradient(400px 300px at 80% 60%, rgba(80,60,160,0.2) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 4rem;
+    background: rgba(14,15,34,0.7);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(168,159,216,0.1);
+  }
+
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: var(--moon);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .logo-icon {
+    width: 28px;
+    height: 28px;
+    opacity: 0.9;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--sky);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--moon); }
+
+  .nav-cta {
+    background: var(--lavender);
+    color: var(--deep) !important;
+    padding: 0.6rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 500 !important;
+    transition: background 0.3s, transform 0.2s !important;
+  }
+
+  .nav-cta:hover {
+    background: var(--moon) !important;
+    transform: translateY(-1px);
+    color: var(--deep) !important;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 8rem 2rem 4rem;
+    z-index: 1;
+  }
+
+  .hero-content {
+    max-width: 780px;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(201,169,110,0.3);
+    padding: 0.4rem 1.2rem;
+    border-radius: 50px;
+    margin-bottom: 2rem;
+    animation: fadeDown 0.8s ease both;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 8vw, 6.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--cream);
+    margin-bottom: 1.5rem;
+    animation: fadeDown 0.8s ease 0.1s both;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--lavender);
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--sky);
+    line-height: 1.7;
+    max-width: 520px;
+    margin: 0 auto 3rem;
+    font-weight: 300;
+    animation: fadeDown 0.8s ease 0.2s both;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeDown 0.8s ease 0.3s both;
+  }
+
+  .btn-primary {
+    background: var(--lavender);
+    color: var(--deep);
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+    box-shadow: 0 0 40px rgba(168,159,216,0.3);
+  }
+
+  .btn-primary:hover {
+    background: var(--moon);
+    transform: translateY(-2px);
+    box-shadow: 0 0 60px rgba(168,159,216,0.5);
+  }
+
+  .btn-secondary {
+    color: var(--mist);
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border: 1px solid rgba(200,212,240,0.25);
+    transition: border-color 0.3s, color 0.3s;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--mist);
+    color: var(--cream);
+  }
+
+  /* Floating product preview */
+  .hero-product {
+    margin-top: 4rem;
+    position: relative;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .product-glow {
+    position: absolute;
+    inset: -60px;
+    background: radial-gradient(ellipse at center, rgba(168,159,216,0.25) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: pulse 4s ease-in-out infinite;
+  }
+
+  .hero-product-img {
+    width: 340px;
+    max-width: 80vw;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 30px 60px rgba(0,0,0,0.6));
+  }
+
+  /* SPECS STRIP */
+  .specs-strip {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    padding: 2rem 4rem;
+    border-top: 1px solid rgba(168,159,216,0.1);
+    border-bottom: 1px solid rgba(168,159,216,0.1);
+    background: rgba(168,159,216,0.04);
+    flex-wrap: wrap;
+  }
+
+  .spec-item {
+    text-align: center;
+  }
+
+  .spec-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--moon);
+    display: block;
+  }
+
+  .spec-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sky);
+    display: block;
+    margin-top: 0.2rem;
+  }
+
+  /* SECTION SHARED */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 7rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--cream);
+    margin-bottom: 1.5rem;
+  }
+
+  .section-title em { font-style: italic; color: var(--lavender); }
+
+  .section-body {
+    font-size: 1rem;
+    color: var(--sky);
+    line-height: 1.8;
+    font-weight: 300;
+    max-width: 520px;
+  }
+
+  /* MODELS GRID */
+  .models-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 4rem;
+  }
+
+  .model-card {
+    background: rgba(168,159,216,0.06);
+    border: 1px solid rgba(168,159,216,0.14);
+    border-radius: 20px;
+    padding: 2rem;
+    transition: transform 0.3s, border-color 0.3s, background 0.3s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .model-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(168,159,216,0.5), transparent);
+  }
+
+  .model-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(168,159,216,0.35);
+    background: rgba(168,159,216,0.1);
+  }
+
+  .model-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--lavender);
+    background: rgba(168,159,216,0.12);
+    border: 1px solid rgba(168,159,216,0.2);
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+  }
+
+  .model-badge.gold {
+    color: var(--gold);
+    background: rgba(201,169,110,0.1);
+    border-color: rgba(201,169,110,0.2);
+  }
+
+  .model-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: var(--moon);
+    margin-bottom: 0.8rem;
+  }
+
+  .model-desc {
+    font-size: 0.88rem;
+    color: var(--sky);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .model-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .model-features li {
+    font-size: 0.82rem;
+    color: var(--mist);
+    padding-left: 1.2rem;
+    position: relative;
+  }
+
+  .model-features li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--lavender);
+    opacity: 0.6;
+  }
+
+  .model-price {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(168,159,216,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .price-tag {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: var(--cream);
+  }
+
+  .add-btn {
+    background: var(--lavender);
+    color: var(--deep);
+    border: none;
+    padding: 0.6rem 1.4rem;
+    border-radius: 50px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 0.03em;
+  }
+
+  .add-btn:hover {
+    background: var(--moon);
+    transform: scale(1.03);
+  }
+
+  /* FEATURED */
+  .featured-card {
+    border: 1.5px solid rgba(168,159,216,0.3);
+  }
+
+  /* WHY SECTION */
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .why-features {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .why-feature {
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+  }
+
+  .feature-icon {
+    width: 44px;
+    height: 44px;
+    background: rgba(168,159,216,0.1);
+    border: 1px solid rgba(168,159,216,0.2);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1.2rem;
+  }
+
+  .feature-text h4 {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--moon);
+    margin-bottom: 0.35rem;
+  }
+
+  .feature-text p {
+    font-size: 0.85rem;
+    color: var(--sky);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .why-visual {
+    position: relative;
+  }
+
+  .why-mockup {
+    background: rgba(168,159,216,0.05);
+    border: 1px solid rgba(168,159,216,0.15);
+    border-radius: 24px;
+    padding: 3rem 2.5rem;
+    text-align: center;
+  }
+
+  .moon-graphic {
+    width: 160px;
+    height: 160px;
+    margin: 0 auto 2rem;
+    position: relative;
+  }
+
+  .sleep-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    background: rgba(168,159,216,0.07);
+    border-radius: 12px;
+    border: 1px solid rgba(168,159,216,0.1);
+  }
+
+  .stat-row-label {
+    font-size: 0.82rem;
+    color: var(--sky);
+  }
+
+  .stat-row-bar {
+    flex: 1;
+    height: 4px;
+    background: rgba(168,159,216,0.15);
+    border-radius: 2px;
+    margin: 0 1rem;
+    overflow: hidden;
+  }
+
+  .stat-row-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--lavender), var(--sky));
+  }
+
+  .stat-row-val {
+    font-size: 0.82rem;
+    color: var(--moon);
+    font-weight: 500;
+    min-width: 36px;
+    text-align: right;
+  }
+
+  /* TESTIMONIALS */
+  .testimonials {
+    padding: 7rem 0;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .testimonials-header {
+    max-width: 600px;
+    margin: 0 auto 4rem;
+    padding: 0 2rem;
+  }
+
+  .testimonials-track {
+    display: flex;
+    gap: 1.5rem;
+    padding: 0 4rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .testimonials-track::-webkit-scrollbar { display: none; }
+
+  .testimonial-card {
+    background: rgba(168,159,216,0.05);
+    border: 1px solid rgba(168,159,216,0.12);
+    border-radius: 20px;
+    padding: 2rem;
+    min-width: 300px;
+    max-width: 340px;
+    text-align: left;
+    flex-shrink: 0;
+  }
+
+  .stars {
+    color: var(--gold);
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+
+  .testimonial-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--mist);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .testimonial-author {
+    font-size: 0.8rem;
+    color: var(--sky);
+    font-weight: 300;
+  }
+
+  .testimonial-author strong {
+    color: var(--moon);
+    font-weight: 500;
+    display: block;
+    margin-bottom: 0.1rem;
+    font-size: 0.85rem;
+  }
+
+  /* DESIGN SELECT */
+  .design-select {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+
+  .color-option {
+    border: 1px solid rgba(168,159,216,0.15);
+    border-radius: 16px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: rgba(168,159,216,0.04);
+  }
+
+  .color-option:hover, .color-option.active {
+    border-color: var(--lavender);
+    background: rgba(168,159,216,0.1);
+    transform: translateY(-2px);
+  }
+
+  .color-swatch {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0 auto 0.8rem;
+    border: 2px solid rgba(255,255,255,0.1);
+  }
+
+  .color-name {
+    font-size: 0.78rem;
+    color: var(--sky);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* CTA BANNER */
+  .cta-banner {
+    position: relative;
+    z-index: 1;
+    margin: 0 4rem 7rem;
+    background: rgba(168,159,216,0.08);
+    border: 1px solid rgba(168,159,216,0.2);
+    border-radius: 28px;
+    padding: 5rem;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .cta-banner::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px;
+    height: 300px;
+    background: radial-gradient(ellipse, rgba(168,159,216,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-banner h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300;
+    color: var(--cream);
+    margin-bottom: 1rem;
+  }
+
+  .cta-banner h2 em { color: var(--lavender); font-style: italic; }
+
+  .cta-banner p {
+    color: var(--sky);
+    font-size: 1rem;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+
+  /* FOOTER */
+  footer {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid rgba(168,159,216,0.1);
+    padding: 3rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: gap;
+    gap: 1rem;
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    color: var(--moon);
+    font-weight: 300;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .footer-links a {
+    color: var(--sky);
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: color 0.3s;
+  }
+
+  .footer-links a:hover { color: var(--moon); }
+
+  .footer-copy {
+    font-size: 0.78rem;
+    color: rgba(139,159,212,0.5);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-16px); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+  }
+
+  /* Cart notification */
+  .cart-toast {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: rgba(168,159,216,0.95);
+    color: var(--deep);
+    padding: 1rem 1.8rem;
+    border-radius: 16px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    z-index: 200;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+    backdrop-filter: blur(10px);
+  }
+
+  .cart-toast.show {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  /* Divider */
+  .divider {
+    position: relative;
+    z-index: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(168,159,216,0.2), transparent);
+    margin: 0 4rem;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 5rem 1.5rem; }
+    .specs-strip { padding: 1.5rem 1.5rem; gap: 1.5rem; }
+    .why-grid { grid-template-columns: 1fr; }
+    #product > div { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+    .cta-banner { margin: 0 1.5rem 5rem; padding: 3rem 2rem; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+    .divider { margin: 0 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <svg class="logo-icon" viewBox="0 0 28 28" fill="none">
+      <path d="M14 3C8 3 3 8 3 14s5 11 11 11c-6-2-9-6.5-9-11 0-5 3.5-9.5 9-11z" fill="#a89fd8" opacity="0.7"/>
+      <path d="M14 3C20 3 25 8 25 14s-5 11-11 11" stroke="#c8d4f0" stroke-width="1.2" fill="none"/>
+      <path d="M9 14 Q12 11 14 14 Q16 17 19 14" stroke="#a89fd8" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+    </svg>
+    Slumber Beat
+  </div>
+  <ul class="nav-links">
+    <li><a href="#product">The Classic</a></li>
+    <li><a href="#features">Why Us</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#product" class="nav-cta">Shop Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <span class="hero-tag">✦ Sleep Technology Reimagined</span>
+    <h1>Drift into <em>deeper</em><br>sleep, every night</h1>
+    <p class="hero-sub">The world's most comfortable sleep headband. Ultra-soft fabric meets premium audio — designed to carry you gently into the night.</p>
+    <div class="hero-actions">
+      <a href="#product" class="btn-primary">Get the Classic</a>
+      <a href="#features" class="btn-secondary">How it works</a>
+    </div>
+    <div class="hero-product">
+      <div class="product-glow"></div>
+      <svg class="hero-product-img" viewBox="0 0 340 160" fill="none">
+        <!-- Headband body -->
+        <ellipse cx="170" cy="95" rx="155" ry="55" fill="#1e2050" stroke="#a89fd8" stroke-width="0.8" stroke-opacity="0.4"/>
+        <ellipse cx="170" cy="90" rx="150" ry="50" fill="#23265a"/>
+        <!-- Fabric texture -->
+        <ellipse cx="170" cy="90" rx="150" ry="50" fill="url(#fabric)" opacity="0.3"/>
+        <!-- Speaker pods -->
+        <ellipse cx="50" cy="90" rx="32" ry="38" fill="#1a1d48" stroke="#a89fd8" stroke-width="0.6" stroke-opacity="0.3"/>
+        <ellipse cx="50" cy="90" rx="26" ry="32" fill="#1f2255"/>
+        <ellipse cx="50" cy="90" rx="14" ry="18" fill="#161840" stroke="#8b9fd4" stroke-width="0.5" stroke-opacity="0.4"/>
+        <ellipse cx="290" cy="90" rx="32" ry="38" fill="#1a1d48" stroke="#a89fd8" stroke-width="0.6" stroke-opacity="0.3"/>
+        <ellipse cx="290" cy="90" rx="26" ry="32" fill="#1f2255"/>
+        <ellipse cx="290" cy="90" rx="14" ry="18" fill="#161840" stroke="#8b9fd4" stroke-width="0.5" stroke-opacity="0.4"/>
+        <!-- Top highlight -->
+        <ellipse cx="170" cy="52" rx="80" ry="8" fill="white" opacity="0.04"/>
+        <!-- Logo on band -->
+        <text x="170" y="95" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#a89fd8" opacity="0.6" font-style="italic">SLUMBER BEAT</text>
+        <!-- Glow line -->
+        <path d="M82 90 Q170 75 258 90" stroke="#a89fd8" stroke-width="0.5" stroke-opacity="0.3" fill="none"/>
+        <defs>
+          <pattern id="fabric" patternUnits="userSpaceOnUse" width="4" height="4">
+            <path d="M0 2 L4 2" stroke="#8b9fd4" stroke-width="0.3" opacity="0.3"/>
+          </pattern>
+        </defs>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- SPECS STRIP -->
+<div class="specs-strip">
+  <div class="spec-item">
+    <span class="spec-value">10 hr</span>
+    <span class="spec-label">Battery Life</span>
+  </div>
+  <div class="spec-item">
+    <span class="spec-value">5.3</span>
+    <span class="spec-label">Bluetooth</span>
+  </div>
+  <div class="spec-item">
+    <span class="spec-value">∞</span>
+    <span class="spec-label">Wash & Wear</span>
+  </div>
+  <div class="spec-item">
+    <span class="spec-value">ANC</span>
+    <span class="spec-label">Noise Cancelling</span>
+  </div>
+  <div class="spec-item">
+    <span class="spec-value">Ultra</span>
+    <span class="spec-label">Soft Fabric</span>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- PRODUCT -->
+<section id="product">
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;">
+
+    <!-- Product Visual -->
+    <div style="position: relative;">
+      <div style="background: rgba(168,159,216,0.05); border: 1px solid rgba(168,159,216,0.14); border-radius: 28px; padding: 4rem 3rem; text-align: center; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: -60px; left: 50%; transform: translateX(-50%); width: 300px; height: 200px; background: radial-gradient(ellipse, rgba(168,159,216,0.15) 0%, transparent 70%); pointer-events: none;"></div>
+        <div style="animation: float 6s ease-in-out infinite; position: relative;">
+          <div style="position: absolute; inset: -40px; background: radial-gradient(ellipse at center, rgba(168,159,216,0.2) 0%, transparent 70%); border-radius: 50%; animation: pulse 4s ease-in-out infinite;"></div>
+          <svg viewBox="0 0 340 160" fill="none" style="width: 100%; max-width: 320px; filter: drop-shadow(0 20px 50px rgba(0,0,0,0.5)); position: relative; z-index: 1;">
+            <ellipse cx="170" cy="95" rx="155" ry="55" fill="#1e2050" stroke="#a89fd8" stroke-width="0.8" stroke-opacity="0.4"/>
+            <ellipse cx="170" cy="90" rx="150" ry="50" fill="#23265a"/>
+            <ellipse cx="170" cy="90" rx="150" ry="50" fill="url(#fabric2)" opacity="0.3"/>
+            <ellipse cx="50" cy="90" rx="32" ry="38" fill="#1a1d48" stroke="#a89fd8" stroke-width="0.6" stroke-opacity="0.3"/>
+            <ellipse cx="50" cy="90" rx="26" ry="32" fill="#1f2255"/>
+            <ellipse cx="50" cy="90" rx="14" ry="18" fill="#161840" stroke="#8b9fd4" stroke-width="0.5" stroke-opacity="0.4"/>
+            <ellipse cx="290" cy="90" rx="32" ry="38" fill="#1a1d48" stroke="#a89fd8" stroke-width="0.6" stroke-opacity="0.3"/>
+            <ellipse cx="290" cy="90" rx="26" ry="32" fill="#1f2255"/>
+            <ellipse cx="290" cy="90" rx="14" ry="18" fill="#161840" stroke="#8b9fd4" stroke-width="0.5" stroke-opacity="0.4"/>
+            <ellipse cx="170" cy="52" rx="80" ry="8" fill="white" opacity="0.04"/>
+            <text x="170" y="95" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#a89fd8" opacity="0.6" font-style="italic">SLUMBER BEAT</text>
+            <path d="M82 90 Q170 75 258 90" stroke="#a89fd8" stroke-width="0.5" stroke-opacity="0.3" fill="none"/>
+            <defs>
+              <pattern id="fabric2" patternUnits="userSpaceOnUse" width="4" height="4">
+                <path d="M0 2 L4 2" stroke="#8b9fd4" stroke-width="0.3" opacity="0.3"/>
+              </pattern>
+            </defs>
+          </svg>
+        </div>
+        <p style="font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(139,159,212,0.5); margin-top: 2rem;">Classic — Midnight Navy</p>
+      </div>
+    </div>
+
+    <!-- Product Details -->
+    <div>
+      <span class="section-label">✦ The Original</span>
+      <h2 class="section-title" style="margin-bottom: 0.8rem;">Slumber Beat<br><em>Classic</em></h2>
+
+      <div style="display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1.5rem;">
+        <span style="font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; color: var(--cream);">$79</span>
+        <span style="font-size: 0.8rem; color: var(--sky); font-weight: 300;">Free shipping · 60-night trial</span>
+      </div>
+
+      <p style="font-size: 1rem; color: var(--sky); line-height: 1.8; font-weight: 300; margin-bottom: 2rem;">The original Slumber Beat. Ultra-soft fleece fabric that disappears as you drift off — paired with binaural-tuned drivers that ease your mind into deep, restful sleep.</p>
+
+      <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2.5rem;">
+        <div style="display: flex; align-items: center; gap: 0.8rem; font-size: 0.88rem; color: var(--mist);">
+          <span style="color: var(--lavender); font-size: 1rem;">◈</span> Bluetooth 5.3 connectivity
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.8rem; font-size: 0.88rem; color: var(--mist);">
+          <span style="color: var(--lavender); font-size: 1rem;">◈</span> 10-hour battery life
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.8rem; font-size: 0.88rem; color: var(--mist);">
+          <span style="color: var(--lavender); font-size: 1rem;">◈</span> Ultra-soft washable fabric
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.8rem; font-size: 0.88rem; color: var(--mist);">
+          <span style="color: var(--lavender); font-size: 1rem;">◈</span> Binaural-tuned drivers
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.8rem; font-size: 0.88rem; color: var(--mist);">
+          <span style="color: var(--lavender); font-size: 1rem;">◈</span> Works with any sleep app or music
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <button class="add-btn" onclick="addToCart('Classic')" style="padding: 1rem 2.5rem; font-size: 0.95rem; border-radius: 50px;">Add to Cart — $79</button>
+        <a href="#features" style="padding: 1rem 1.8rem; border-radius: 50px; border: 1px solid rgba(200,212,240,0.2); color: var(--sky); font-size: 0.9rem; text-decoration: none; display: flex; align-items: center; transition: border-color 0.3s, color 0.3s;" onmouseover="this.style.borderColor='rgba(200,212,240,0.5)'; this.style.color='var(--cream)'" onmouseout="this.style.borderColor='rgba(200,212,240,0.2)'; this.style.color='var(--sky)'">Learn more</a>
+      </div>
+
+      <p style="font-size: 0.75rem; color: rgba(139,159,212,0.5); margin-top: 1.2rem; line-height: 1.6;">✓ 60-night sleep trial &nbsp;·&nbsp; ✓ Free returns &nbsp;·&nbsp; ✓ Machine washable</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHY -->
+<section id="features">
+  <div class="why-grid">
+    <div>
+      <span class="section-label">✦ Why Slumber Beat</span>
+      <h2 class="section-title">Sleep is a <em>ritual</em>,<br>not an afterthought</h2>
+      <p class="section-body">We designed Slumber Beat from the sleep up — starting with comfort and building the technology around it.</p>
+
+      <div class="why-features">
+        <div class="why-feature">
+          <div class="feature-icon">🌙</div>
+          <div class="feature-text">
+            <h4>Stays on all night</h4>
+            <p>Flexible, lightweight form stays in place whether you sleep on your back, side, or move around frequently.</p>
+          </div>
+        </div>
+        <div class="why-feature">
+          <div class="feature-icon">🎵</div>
+          <div class="feature-text">
+            <h4>Premium audio for sleep</h4>
+            <p>Binaural-tuned drivers deliver the right frequencies to ease your mind into rest — not just play music.</p>
+          </div>
+        </div>
+        <div class="why-feature">
+          <div class="feature-icon">✨</div>
+          <div class="feature-text">
+            <h4>Designed with care</h4>
+            <p>Every material, weight, and curve was chosen to disappear from your awareness as you fall asleep.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="why-visual">
+      <div class="why-mockup">
+        <svg width="120" height="120" viewBox="0 0 120 120" fill="none" style="margin-bottom: 1.5rem;">
+          <circle cx="60" cy="60" r="50" stroke="rgba(168,159,216,0.2)" stroke-width="1"/>
+          <circle cx="60" cy="60" r="38" stroke="rgba(168,159,216,0.15)" stroke-width="0.8"/>
+          <path d="M60 20C43 20 28 33 28 50c0 12 7 22 18 28-8-3-14-10.5-14-19 0-12 10-21.5 22-22z" fill="#a89fd8" opacity="0.6"/>
+          <path d="M60 20C77 20 92 33 92 50s-15 30-32 30" stroke="#c8d4f0" stroke-width="1" fill="none"/>
+          <path d="M46 50 Q53 44 60 50 Q67 56 74 50" stroke="#a89fd8" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <circle cx="60" cy="60" r="4" fill="#a89fd8" opacity="0.4"/>
+        </svg>
+
+        <div class="sleep-stat">
+          <div class="stat-row">
+            <span class="stat-row-label">Deep Sleep</span>
+            <div class="stat-row-bar"><div class="stat-row-fill" style="width: 78%;"></div></div>
+            <span class="stat-row-val">78%</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-row-label">REM Cycles</span>
+            <div class="stat-row-bar"><div class="stat-row-fill" style="width: 92%;"></div></div>
+            <span class="stat-row-val">+92%</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-row-label">Wakefulness</span>
+            <div class="stat-row-bar"><div class="stat-row-fill" style="width: 18%; background: linear-gradient(90deg, #c9a96e, #e8c87a);"></div></div>
+            <span class="stat-row-val">−18%</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-row-label">Recovery Score</span>
+            <div class="stat-row-bar"><div class="stat-row-fill" style="width: 95%;"></div></div>
+            <span class="stat-row-val">95</span>
+          </div>
+        </div>
+
+        <p style="font-size: 0.7rem; color: rgba(139,159,212,0.5); margin-top: 1.2rem; letter-spacing: 0.05em;">Average reported improvements after 30 days</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="divider"></div>
+
+<!-- TESTIMONIALS -->
+<div class="testimonials" id="reviews">
+  <div class="testimonials-header">
+    <span class="section-label" style="display:block; margin-bottom: 0.8rem;">✦ From Our Sleepers</span>
+    <h2 class="section-title" style="max-width:100%;">What the night<br><em>sounds like now</em></h2>
+  </div>
+
+  <div class="testimonials-track">
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"I've tried every sleep mask and ear plug imaginable. Slumber Beat Classic is the first thing that actually disappeared — I forgot it was there and just... slept."</p>
+      <div class="testimonial-author">
+        <strong>Amara T.</strong>
+        Chronic insomniac, 3 years
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"The audio quality for sleep sounds is unreal — like having a private sound bath every night. I haven't slept this well in years."</p>
+      <div class="testimonial-author">
+        <strong>Daniel K.</strong>
+        ASMR enthusiast
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"I travel every week for work. Ten-hour battery means I land rested instead of wrecked. The Classic has been on 40 flights with me."</p>
+      <div class="testimonial-author">
+        <strong>Sofia R.</strong>
+        Business traveler
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Soft enough to sleep in, good enough to actually enjoy. The fabric feels like nothing — which is exactly the point."</p>
+      <div class="testimonial-author">
+        <strong>Marcus L.</strong>
+        Light sleeper
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA BANNER -->
+<div class="cta-banner">
+  <span class="section-label" style="display:block; margin-bottom:0.8rem; justify-content:center;">✦ Start Sleeping Better Tonight</span>
+  <h2>Your best night's sleep<br><em>is one decision away</em></h2>
+  <p>Free shipping on all orders. 60-night sleep trial. If you don't sleep better, we'll make it right.</p>
+  <a href="#product" class="btn-primary" style="font-size: 1rem; padding: 1.1rem 3rem;">Get the Classic — $79</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Slumber Beat</div>
+  <ul class="footer-links">
+    <li><a href="#">Shop</a></li>
+    <li><a href="#">Sleep Guide</a></li>
+    <li><a href="#">FAQ</a></li>
+    <li><a href="#">Contact</a></li>
+    <li><a href="#">Returns</a></li>
+  </ul>
+  <p class="footer-copy">© 2026 Slumber Beat. Sleep Soundly.</p>
+</footer>
+
+<!-- CART TOAST -->
+<div class="cart-toast" id="cartToast">✓ Added to cart</div>
+
+<script>
+  function addToCart(name) {
+    const toast = document.getElementById('cartToast');
+    toast.textContent = '✓ ' + name + ' added to cart';
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2800);
+  }
+
+  function selectColor(el) {
+    document.querySelectorAll('.color-option').forEach(e => e.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  // Fade in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.model-card, .why-feature, .testimonial-card, .color-option').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease, border-color 0.3s, background 0.3s';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
